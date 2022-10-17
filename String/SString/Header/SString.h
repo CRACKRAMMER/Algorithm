@@ -26,7 +26,7 @@ void StrInsert(SString S, int pos, SString T);
 void StrDelete(SString S, int pos, int len);
 void StrClear(SString S);
 
-void StrIndex(SString S, SString T, int pos);
+int StrIndex(SString S, SString T, int pos);
 void StrReplace(SString S, SString T, SString V);
 
 #endif // __SSTRING_H__
