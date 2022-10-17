@@ -1,3 +1,4 @@
+
 CC = g++
 LIB = -I ./Header
 BUILD_DIR = Build
@@ -26,3 +27,4 @@ debug:
 clean:
 	rm $(OUTFILE)
 	cd $(BUILD_DIR) && rm -f ./*
+

@@ -4,14 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
-#define MAXSTRLEN 255
+#define MAXSTRLEN 20
 #define u_char unsigned char
 
 typedef u_char SString[MAXSTRLEN+1];
 typedef int ElemType;
 
 void InitString(SString S);
+void PrintString(SString S);
 
 void StrAssign(SString S, char *str);
 void StrCopy(SString S, SString T);
