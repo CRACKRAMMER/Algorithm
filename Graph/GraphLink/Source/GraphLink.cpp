@@ -50,10 +50,10 @@ void InsertEdge(GraphLink *graph, ElemType v1, ElemType v2) {
     p1->link = graph->NodeTable[pv1].adj;
     graph->NodeTable[pv1].adj = p1;
 
-    Edge *p2 = (Edge *)malloc(sizeof(Edge));
-    p2->dest = pv1;
-    p2->link = graph->NodeTable[pv2].adj;
-    graph->NodeTable[pv2].adj = p2;
+    // Edge *p2 = (Edge *)malloc(sizeof(Edge));
+    // p2->dest = pv1;
+    // p2->link = graph->NodeTable[pv2].adj;
+    // graph->NodeTable[pv2].adj = p2;
 }
 
 void RemoveVertex(GraphLink *graph, ElemType data) {
@@ -102,7 +102,7 @@ void RemoveEdge(GraphLink *graph, ElemType v1, ElemType v2) {
     if(pv1 == -1 || pv2 == -1)
         return;
     _RemoveEdge(graph, pv1, pv2);
-    _RemoveEdge(graph, pv2, pv1);
+    // _RemoveEdge(graph, pv2, pv1);
 }
 
 void DestroyGraph(GraphLink *graph) {
@@ -222,4 +222,45 @@ void BFSGraph(GraphLink *graph, ElemType data) {
     }
     printf("Nul.\n");
     free(visited);
+}
+
+void TopologicalSort(GraphLink *graph) {
+    int n = graph->NumVertices;
+    int *count = (int*)malloc(sizeof(int)*n);
+    int top = -1;
+    memset(count, 0, sizeof(int)*n);
+
+    for(int i=0; i<n; i++) {
+        Edge *edge = graph->NodeTable[i].adj;
+        while(edge) {
+            count[edge->dest]++;
+            edge = edge->link;
+        }
+    }
+
+    for(int i=0; i<n; i++) {
+        if(count[i] == 0) {
+            count[i] = top;
+            top = i;
+        }
+    }
+
+    for(int i=0; i<n; i++) {
+        if(top == -1) {
+            printf("error-->");
+            break;
+        } else {
+            printf("%c-->", graph->NodeTable[top].data);
+            Edge *edge = graph->NodeTable[top].adj;
+            top = count[top];
+            while(edge) {
+                if(--count[edge->dest] == 0) {
+                    count[edge->dest] = top;
+                    top = edge->dest;
+                }
+                edge = edge->link;
+            }
+        }
+    }
+    printf("Nul\n");
 }

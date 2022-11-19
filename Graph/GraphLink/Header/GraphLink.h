@@ -43,4 +43,6 @@ int GetNextNeighbor(GraphLink *graph, int pv1, int pv2);
 void DFSGraph(GraphLink *graph, ElemType data);
 void BFSGraph(GraphLink *graph, ElemType data);
 
+void TopologicalSort(GraphLink *graph);
+
 #endif //__GRAPHLINK_H__
